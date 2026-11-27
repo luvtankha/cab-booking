@@ -1,0 +1,49 @@
+name: Verify application
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: cab_test
+          POSTGRES_USER: wayfare
+          POSTGRES_PASSWORD: isolated-ci-password
+        ports: ['5432:5432']
+        options: --health-cmd "pg_isready -U wayfare -d cab_test" --health-interval 4s --health-timeout 3s --health-retries 12
+    env:
+      TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/cab_test
+      DB_USER: wayfare
+      DB_PASSWORD: isolated-ci-password
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: server/pom.xml
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: mvn -B package
+        working-directory: server
+      - run: npm ci
+        working-directory: client
+      - run: npm run build
+        working-directory: client
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: client
+      - run: npm run test:e2e
+        working-directory: client
+      - run: docker build -t portfolio-app:ci .

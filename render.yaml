@@ -1,0 +1,38 @@
+services:
+  - name: wayfare
+    type: web
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_HOST
+        fromDatabase:
+          name: wayfare-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: wayfare-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: wayfare-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: wayfare-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: wayfare-db
+          property: password
+databases:
+  - name: wayfare-db
+    plan: free
+    region: oregon
+    postgresMajorVersion: '17'
+    ipAllowList: []

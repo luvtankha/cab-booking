@@ -1,0 +1,38 @@
+:root{--page:#edf2f5;--panel:#fbfdfd;--input:#f3f7f8;--text:#192a3d;--muted:#536777;--line:#d7e2e7;--primary:#167b68;--on-primary:#fff;--accent:#126b5b;--focus:#4e9c8c;--soft:#e1f2ee;--art-bg:radial-gradient(circle at 50% 42%,#245e66,#172d43);--art-line:#8fb5a762;--art-accent:#a9ddc8;--art-ink:#183c41}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px max(14px,calc((100vw - 1240px)/2));height:61px;background:#142c3c;color:#f5ffff}
+.topbar .brand-symbol{background:#a5e2ca;color:#194b48}
+.top-actions,.live{display:flex;align-items:center;gap:9px}
+.top-actions .icon{color:#dfefee}.owner-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.live{font-size:11px;color:#c8dfe0;white-space:nowrap}
+.live i{width:8px;height:8px;border-radius:50%;background:#b28b68}.live i.on{background:#82d8b4;box-shadow:0 0 0 3px #365858}
+.way-main{width:min(1240px,calc(100% - 28px));margin:0 auto;padding:22px 0 35px}
+.dispatch{display:grid;grid-template-columns:minmax(292px,390px) minmax(0,1fr);gap:12px;align-items:start}
+.dispatch-controls{display:grid;gap:9px}
+.booking header,.driver header{margin-bottom:12px}
+.eyebrow{font-size:11px;letter-spacing:.06em;color:var(--accent);font-weight:740;text-transform:uppercase}
+.booking h1,.driver h1{font-size:clamp(32px,4vw,42px);margin-top:4px}
+.address{display:grid;gap:4px}
+.coord-controls{display:flex;align-items:center;gap:7px;color:var(--muted)}
+.coord-controls .button{min-height:29px;font-size:11px}
+.quote{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#e2f1ec;border:1px solid #cbe6db;border-radius:9px;margin-top:12px;padding:9px}
+.quote>div{display:grid;gap:2px}.quote strong{font-size:23px}.quote small,.quote span{color:#45635b;font-size:11px}
+.trip-map{width:100%;height:440px;isolation:isolate;border-radius:9px;background:#dce8dc;border:1px solid var(--line);margin-top:12px}
+.route-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.route-details dt{font-size:11px;color:var(--muted)}.route-details dd{font-weight:680;overflow-wrap:anywhere}
+.trip-actions,.driver-stat{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.driver-stat{margin:10px 0;gap:12px}.driver-stat>span{padding:7px;background:var(--soft);border-radius:7px;display:flex;gap:4px;align-items:center;color:#306258;font-size:12px}
+.driver .muted{margin-top:8px;font-size:12px}
+.status,.paid{display:inline-flex;align-items:center;gap:5px;color:#2b5d59;background:#e0f0ed;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap}
+.status.requested{color:#684c32;background:#f4e5d6}.status.cancelled{color:#803345;background:#f9e7eb}.status.in_progress{color:#3b5192;background:#e8eefb}
+.history,.requests,.ranking,.ops .panel{margin-top:11px}
+.list-line{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px;text-align:left;border-bottom:1px solid var(--line);padding:8px 0}
+.list-line:last-child{border:0}.list-line>span:first-child{display:grid;gap:2px;overflow-wrap:anywhere}.list-line small{color:var(--muted)}
+.history-row:hover{background:var(--soft)}
+.ranking li{display:flex;gap:8px;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
+.ranking .muted,.history .muted,.requests .muted{margin-top:8px}
+.banner{display:flex;align-items:center;gap:8px;background:var(--soft);color:var(--accent);border-radius:8px;padding:8px;margin-bottom:8px}
+.banner button{margin-left:auto}
+.status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px}.status-grid .panel{display:grid;gap:4px}.status-grid strong{font-size:25px}
+.promo{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px;margin:8px 0}
+@media(max-width:760px){.dispatch{grid-template-columns:1fr}.trip-map{height:310px}.topbar{padding:9px 14px}.way-main{padding-top:15px}.owner-name{display:none}}
+@media(max-width:420px){.trip-map{height:275px}.form-row{grid-template-columns:1fr}.list-line .trip-actions{flex-wrap:nowrap}}

@@ -1,0 +1,45 @@
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${PORT:7701}
+  forward-headers-strategy: framework
+spring:
+  application.name: wayfare
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:file:./.local/wayfare;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+    hikari.maximum-pool-size: 6
+  jpa:
+    open-in-view: false
+    hibernate.ddl-auto: validate
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${SMTP_AUTH:true}
+      mail.smtp.starttls.enable: ${SMTP_TLS:true}
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+management:
+  endpoints.web.exposure.include: health
+  health.mail.enabled: false
+app:
+  jwt-secret: ${JWT_SECRET:}
+  origin: ${APP_ORIGIN:}
+  demo: ${DEMO_PAYMENTS:false}
+  router: ${ROUTER_URL:}
+  stripe-secret: ${STRIPE_SECRET_KEY:}
+  stripe-public: ${STRIPE_PUBLISHABLE_KEY:}
+  stripe-signing: ${STRIPE_WEBHOOK_SECRET:}
+  google-id: ${GOOGLE_CLIENT_ID:}
+  google-secret: ${GOOGLE_CLIENT_SECRET:}
+  admin-email: ${ADMIN_EMAIL:}
+  admin-password: ${ADMIN_PASSWORD:}
+  receipt-from: ${RECEIPT_FROM:}
+---
+spring.config.activate.on-profile: render
+server.address: 0.0.0.0
+spring.datasource.url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
